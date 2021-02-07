@@ -1,83 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Header = (props) => {
+const Display = ({ counter }) => <div>{ counter }</div>
+
+const Button = ({ handleClick, text }) => {
   return (
-    <div>
-      <h1>{props.course}</h1>
-    </div>
-  )
-}
-
-const Content = (props) => {
-  const [ part1, part2, part3 ] = props.parts
-
-  return (
-    <div>
-      <Part
-        name={ part1.name }
-        exercises={ part1.exercises }
-      />
-      <Part
-        name={ part2.name }
-        exercises={ part2.exercises }
-      />
-      <Part
-        name={ part3.name }
-        exercises={ part3.exercises }
-      />
-    </div>
-  )
-}
-
-const Part = (props) => {
-  return(
-    <div>
-      <p>
-        { props.name } { props.exercises }
-      </p>
-    </div>
-  )
-}
-
-const Total = (props) => {
-  const [ part1, part2, part3 ] = props.parts
-
-  return(
-    <div>
-      <p>
-        Number of exercises { part1.exercises + part2.exercises + part3.exercises }
-      </p>
-    </div>
+    <button onClick={ handleClick }>
+      { text }
+    </button>
   )
 }
 
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      },
-    ]
-  }
+  const [ counter, setCounter ] = useState(0)
+  const increaseByOne = () => setCounter(counter + 1)
+  const decreaseByOne = () => setCounter(counter - 1)
+  const setToZero = () => setCounter(0)
 
   return (
     <div>
-      <Header course={ course.name }/>
-      <Content parts={ course.parts }/>
-      <Total parts={ course.parts }/>
+      <Display counter={ counter } />
+      <Button
+        handleClick={ increaseByOne }
+        text="plus"
+      />
+      <Button
+        handleClick={ setToZero }
+        text="zero"
+      />
+      <Button
+        handleClick={ decreaseByOne }
+        text="minus"
+      />
     </div>
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+)
