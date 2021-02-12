@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-const Button = ({ handleClick, text }) => (<button onClick={ handleClick }>{ text }</button>)
+const Button = ({ handleClick, text }) => (<div><button onClick={ handleClick }>{ text }</button></div>)
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
+  const getRandomNumber = max => (Math.floor(Math.random() * Math.floor(max)));
+  const handleAnectodeClick = () => (setSelected(getRandomNumber(props.anecdotes.length)))
 
   return (
     <div>
       {props.anecdotes[selected]}
+      <Button  handleClick = { handleAnectodeClick } text='next anecdote' />
     </div>
   )
 }
@@ -23,5 +26,6 @@ const anecdotes = [
 ]
 
 ReactDOM.render(
-  <App />
+  <App anecdotes={anecdotes} />,
+  document.getElementById('root')
 );
