@@ -19,8 +19,6 @@ const App = (props) => {
     setMax(Math.max(...setPoint))
   }
 
-  console.log(points)
-
   return (
     <div> 
       <h2>Anecdote of the day</h2>
