@@ -1,12 +1,15 @@
 import React from 'react';
-import Part from './Part'
+import Part from './Part';
+import Total from './Total';
 
 const Content = ({course}) => {
+  // TODO key の値をユニークなものに変更したい
+  const parts = course.parts.map(part => <Part key={part.name} part={ part } />)
+
   return (
     <div>
-      <Part part={course.parts[0]} />
-      <Part part={course.parts[1]} />
-      <Part part={course.parts[2]} />
+      { parts }
+      <Total parts={course.parts} />
     </div>
   )
 }
