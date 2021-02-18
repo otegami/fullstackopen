@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
+import Countries from './components/Countries'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = () => {
+  const [countries, setCountries] = useState([])
+  const [searchCountry, setSearchCountry] = useState('')
+
+  useEffect(() => {
+    const eventCountryHandler = response => {
+      setCountries(response.data)
+    }
+
+    const promiseCountry = axios.get("https://restcountries.eu/rest/v2/all")
+    promiseCountry.then(eventCountryHandler)
+  }, [])
+
+  const handleSearchCountryChange = (event) => {
+    setSearchCountry(event.target.value)
+  }
+  
+  const filterdCountries = countries.filter(country => country.name.includes(searchCountry))
+  const switchedContent = filterdCountries.length >= 10 ? "Too many matches, specify another filter" : <Countries countries={filterdCountries} />
+
+  return(
+    <div>
+      find countries: <input value={searchCountry} onChange={handleSearchCountryChange} />
+      <div>
+        { switchedContent }
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
