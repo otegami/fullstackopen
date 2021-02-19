@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import Countries from './components/Countries'
+import Filter from './components/Filter'
+import CountryList from './components/CountryList'
 
 const App = () => {
   const [countries, setCountries] = useState([])
@@ -16,18 +17,15 @@ const App = () => {
   }, [])
 
   const handleSearchCountryChange = (event) => {
+    event.preventDefault()
     setSearchCountry(event.target.value)
   }
-  
   const filterdCountries = countries.filter(country => country.name.includes(searchCountry))
-  const switchedContent = filterdCountries.length >= 10 ? "Too many matches, specify another filter" : <Countries countries={filterdCountries} />
 
   return(
     <div>
-      find countries: <input value={searchCountry} onChange={handleSearchCountryChange} />
-      <div>
-        { switchedContent }
-      </div>
+      <Filter value={searchCountry} handleChange={handleSearchCountryChange} />
+      <CountryList countries={filterdCountries} handleClick={handleSearchCountryChange} />
     </div>
   )
 }
