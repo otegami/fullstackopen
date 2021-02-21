@@ -2,13 +2,8 @@
   "persons": [
     {
       "id": 1,
-      "name": "kodama",
-      "number": "09090"
-    },
-    {
-      "id": 2,
-      "name": "naoki",
-      "number": "09098721"
+      "name": "Juha Tag",
+      "number": "000 0000 0000"
     }
   ]
 }
