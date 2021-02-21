@@ -10,7 +10,7 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState('')
   const [ searchName, setSearchName] = useState('')
-  const [ successMessage, setSuccessMessage ] = useState(null)
+  const [ message, setMessage ] = useState(null)
 
   useEffect(() => {
     personService.getAll().then(response => setPersons(response))
@@ -31,10 +31,11 @@ const App = () => {
           setPersons(persons.concat(response))
           setNewName('')
           setNewNumber('')
-          setSuccessMessage(`Added ${response.name}`)
+          setMessage(`Added ${response.name}`)
         })
+        .catch()
       setTimeout(() => {
-        setSuccessMessage(null)
+        setMessage(null)
       }, 3000)
     } else {
       if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
@@ -42,11 +43,17 @@ const App = () => {
         personService.update(person.id, updatePersonObject)
           .then(retrunedPerson => {
             setPersons(persons.map(person => person.name === newName ? retrunedPerson : person))
-            setSuccessMessage(`Changed ${retrunedPerson.name}'s number!`)
+            setMessage(`Changed ${retrunedPerson.name}'s number!`)
+            setTimeout(() => {
+              setMessage(null)
+            }, 3000)
           })
-        setTimeout(() => {
-          setSuccessMessage(null)
-        }, 3000)
+          .catch(error => {
+            setMessage(`Information of ${updatePersonObject.name} has already been removed from server`)
+            setTimeout(() => {
+              setMessage(null)
+            }, 3000)
+          })
       }
     }
   }
@@ -73,7 +80,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-        <Notification message={successMessage} />
+        <Notification message={message} />
         <Filter value={searchName} onChange={handleSearchNameChange} />
       <h2>Add a new</h2>
         <PersonForm
