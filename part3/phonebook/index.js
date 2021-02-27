@@ -9,7 +9,6 @@ morgan.token('body', (request) => {
 })
 app.use(morgan(':method :url :status :response-time ms :body'))
 
-
 let persons = [
   {
     id: 1,
