@@ -1,21 +1,38 @@
-const notificationReducer = (state = 'InitialMessage', action) => {
+const notificationReducer = (state = '', action) => {
   switch(action.type){
+    case 'SHOW_VOTE':
+      return `you voted '${action.data.content}'`
+    case 'CREATED_ANECDOTE':
+      return `you created '${action.data.content}'`
+    case 'SET_NOTIFICATION':
+      return action.data.content
     default:
       return state
   }
 }
 
-export const showVoteInfo = (id) => {
+export const showVoteInfo = (anecdote) => {
   return {
     type: 'SHOW_VOTE',
-    data: { id }
+    data: {
+      content: anecdote
+    }
   }
 }
 
-export const createdAnecdoteInfo = (id) => {
+export const createdAnecdoteInfo = (anecdote) => {
   return {
     type: 'CREATED_ANECDOTE',
-    data: { id }
+    data: {
+      content: anecdote
+    }
+  }
+}
+
+export const setNotification = (content) => {
+  return {
+    type: 'SET_NOTIFICATION',
+    data: { content }
   }
 }
 
