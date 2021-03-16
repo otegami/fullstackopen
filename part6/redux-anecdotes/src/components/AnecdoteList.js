@@ -4,7 +4,9 @@ import { addVote } from '../reducers/anecdoteReducer'
 import { showVoteInfo } from '../reducers/notificationReducer'
 
 const AnecdoteList = () => {
-  const anecdotes = useSelector(state => state.anecdotes)
+  const anecdotes = useSelector(({ anecdotes, filter }) => {
+    return anecdotes.filter(anecdote => anecdote.content.includes(filter))
+  })
   const dispatch = useDispatch()
   const sortedAnecdotes = anecdotes.slice().sort((anec1, anec2) => {
     return anec2.votes - anec1.votes
