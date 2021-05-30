@@ -1,6 +1,5 @@
-import React from 'react'
-
 const notificationReducer = (state = '', action) => {
+  console.log(action.notification)
   switch(action.type) {
     case 'SET_NOTIFICATION':
       return action.notification
@@ -9,6 +8,20 @@ const notificationReducer = (state = '', action) => {
     default:
       return state
   }
+}
+
+export const setNotification = (notification) => {
+  return({
+    type: 'SET_NOTIFICATION',
+    notification
+  })
+}
+
+export const removeNotification = () => {
+  return({ 
+    type: 'REMOVE_NOTIFICATION',
+    notification: ''
+  })
 }
 
 export default notificationReducer
