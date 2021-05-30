@@ -1,14 +1,19 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useEffect } from 'react-redux'
 import { addVote } from '../reducers/anecdoteReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
 const Vote = ({ anecdote }) => {
   const dispatch = useDispatch()
+  const vote = (anecdote) => {
+    dispatch(addVote(anecdote.id))
+    dispatch(setNotification(`you voted to ${anecdote.content}`))
+  }
 
   return(
     <div>
       has {anecdote.votes}
-      <button onClick={() => dispatch(addVote(anecdote.id))}>vote</button>
+      <button onClick={() => vote(anecdote)}>vote</button>
     </div>
   )
 }
