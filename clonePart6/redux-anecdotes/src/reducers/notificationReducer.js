@@ -1,9 +1,11 @@
 import React from 'react'
 
-const initialState = 'render here notification...'
-
-const notificationReducer = (state = initialState, action) => {
+const notificationReducer = (state = '', action) => {
   switch(action.type) {
+    case 'SET_NOTIFICATION':
+      return action.notification
+    case 'REMOVE_NOTIFICATION':
+      return ''
     default:
       return state
   }
