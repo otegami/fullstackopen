@@ -1,6 +1,5 @@
 import notificationReducer from './notificationReducer'
-// TODO: deepFreeze を追加したら外す
-// import deepFreeze from 'deep-freeze'
+import deepFreeze from 'deep-freeze'
 
 describe('notificationReducer', () => {
   test('returns new state with action SET_NOTIFICATION', () => {
@@ -10,7 +9,7 @@ describe('notificationReducer', () => {
       notification: 'set new notification'
     }
 
-    // deepFreeze(state)
+    deepFreeze(state)
     const newState = notificationReducer(state, action)
     expect(newState).toEqual(action.notification)
   })
@@ -22,7 +21,7 @@ describe('notificationReducer', () => {
       notification: 'remove a notification'
     }
 
-    // deepFreeze(state)
+    deepFreeze(state)
     const newState = notificationReducer(state, action)
     expect(newState).toEqual('')
   })
