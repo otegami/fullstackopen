@@ -1,4 +1,5 @@
 import React from 'react'
+import Filter from './components/Filter'
 import Notification from './components/Notification'
 import NewAnecdote from './components/NewAnecdote'
 import AnecdoteList from './components/AnecdoteList'
@@ -6,8 +7,9 @@ import AnecdoteList from './components/AnecdoteList'
 const App = () => {
   return (
     <div>
-      <Notification />
       <h2>Anecdotes</h2>
+      <Filter />
+      <Notification />
       <AnecdoteList />
       <NewAnecdote />
     </div>
