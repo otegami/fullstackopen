@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import Vote from './Vote'
 
 const AnecdoteList = () => {
-  const anecdotes = useSelector(state => state)
+  const anecdotes = useSelector(state => state.anecdotes)  
   const sortedAnecdotes = anecdotes.slice().sort((anec1, anec2) => {
     return anec2.votes - anec1.votes
   })
