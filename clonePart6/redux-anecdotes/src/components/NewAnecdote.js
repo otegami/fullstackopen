@@ -11,9 +11,8 @@ const NewAnecdote = () => {
     event.preventDefault()
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
-    const newAnecdote = await anecdoteService.createAnecdote(content)
-    dispatch(createAnecdote(newAnecdote))
-    dispatch(setNotification(`you created a ${newAnecdote.content}`))
+    dispatch(createAnecdote(content))
+    dispatch(setNotification(`you created a ${content}`))
   }
   return(
     <div>
