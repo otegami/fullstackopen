@@ -50,14 +50,10 @@ export const initializeAnecdotes = (anecdotes) => {
   })
 }
 
-export const createAnecdote = (content) => {
+export const createAnecdote = (data) => {
   return({
     type: 'ADD_ANECDOTE',
-    data: {
-      content,
-      id: getId(),
-      votes: 0
-    }
+    data
   })
 }
 
