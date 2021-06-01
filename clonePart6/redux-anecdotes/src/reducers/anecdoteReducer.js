@@ -36,9 +36,18 @@ const anecdoteReducer = (state = initialState, action) => {
         anecdote.id !== id ? anecdote : changedAnecdote
       )
     }
+    case 'INIT_ANECDOTES':
+      return action.data
     default:
       return state
   }
+}
+
+export const initializeAnecdotes = (anecdotes) => {
+  return({
+    type: 'INIT_ANECDOTES',
+    data: anecdotes
+  })
 }
 
 export const createAnecdote = (content) => {
