@@ -43,7 +43,18 @@ const anecdoteReducer = (state = initialState, action) => {
   }
 }
 
+return async dispatch => {
+  const notes = await noteService.getAll()
+  dispatch({
+    type: 'INIT_NOTES',
+    data: notes,
+  })
+}
+
 export const initializeAnecdotes = (anecdotes) => {
+  return async dispatch => {
+    const anecdotes = await anecdoteSer
+  }
   return({
     type: 'INIT_ANECDOTES',
     data: anecdotes
