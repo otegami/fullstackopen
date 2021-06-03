@@ -147,22 +147,21 @@ const App = () => {
   }
 
   const match = useRouteMatch('/anecdotes/:id')
-  debugger
   const anecdote = match
     ? anecdotes.find(anecdote => anecdote.id === Number(match.params.id))
     : null
 
   return (
-    <Router>
+    <div>
       <h1>Software anecdotes</h1>
       <Menu />
 
       <Switch>
-        <Route path="/anecdotes/:id">
-          <Anecdote anecdote={anecdote}/>
-        </Route>
         <Route path="/anecdotes/new">
           <CreateNew addNew={addNew} />
+        </Route>
+        <Route path="/anecdotes/:id">
+          <Anecdote anecdote={anecdote}/>
         </Route>
         <Route path="/about">
           <About />
@@ -172,7 +171,7 @@ const App = () => {
         </Route>
       </Switch>
       <Footer />
-    </Router>
+    </div>
   )
 }
 
