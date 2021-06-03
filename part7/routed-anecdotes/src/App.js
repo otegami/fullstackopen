@@ -26,7 +26,13 @@ const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
     <ul>
-      {anecdotes.map(anecdote => <li key={anecdote.id} >{anecdote.content}</li>)}
+      {anecdotes.map(anecdote =>
+        <li key={anecdote.id} >
+          <Link to= {`/anecdotes/${anecdote.id}`}>
+            {anecdote.content}
+          </Link>
+        </li>
+      )}
     </ul>
   </div>
 )
@@ -89,7 +95,16 @@ const CreateNew = (props) => {
       </form>
     </div>
   )
+}
 
+const Anecdote = ({ anecdote }) => {
+  return(
+    <div>
+      <h2>{anecdote.content}</h2>
+      <p>has {anecdote.votes} votes</p>
+      <p>for more info see { anecdote.info }</p>
+    </div>
+  )
 }
 
 const App = () => {
@@ -99,14 +114,14 @@ const App = () => {
       author: 'Jez Humble',
       info: 'https://martinfowler.com/bliki/FrequencyReducesDifficulty.html',
       votes: 0,
-      id: '1'
+      id: 1
     },
     {
       content: 'Premature optimization is the root of all evil',
       author: 'Donald Knuth',
       info: 'http://wiki.c2.com/?PrematureOptimization',
       votes: 0,
-      id: '2'
+      id: 2
     }
   ])
 
@@ -131,16 +146,26 @@ const App = () => {
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
   }
 
+  const match = useRouteMatch('/anecdotes/:id')
+  debugger
+  const anecdote = match
+    ? anecdotes.find(anecdote => anecdote.id === Number(match.params.id))
+    : null
+
   return (
     <Router>
       <h1>Software anecdotes</h1>
       <Menu />
+
       <Switch>
-        <Route path="/about">
-          <About />
+        <Route path="/anecdotes/:id">
+          <Anecdote anecdote={anecdote}/>
         </Route>
         <Route path="/anecdotes/new">
           <CreateNew addNew={addNew} />
+        </Route>
+        <Route path="/about">
+          <About />
         </Route>
         <Route path="/">
           <AnecdoteList anecdotes={anecdotes} />
