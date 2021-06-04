@@ -1,40 +1,40 @@
 import React, { useState } from 'react'
 
-const App = (props) => {
-  const left = useCounter()
-  const right = useCounter()
+const App = () => {
+  const name = useField('text')
+  const born = useField('date')
+  const height = useField('number')
 
   return (
     <div>
-      {left.value}
-      <button onClick={left.increase}>
-        left
-      </button>
-      <button onClick={right.increase}>
-        right
-      </button>
-      {right.value}
+      <form>
+        name:
+        <input {...name} />
+        <br />
+        birthdate:
+        <input {...born} />
+        <br />
+        height:
+        <input {...height} />
+      </form>
+      <div>
+        { name.value } { born.value } { height.value }
+      </div>
     </div>
   )
 }
 
-const useCounter = () => {
-  const [value, setValue] = useState(0)
+const useField = (type) => {
+  const [value, setValue] = useState('')
 
-  const increase = () => {
-    setValue(value + 1)
-  }
-
-  const decrease = () => {
-    setValue(value - 1)
-  }
-
-  const zero = () => {
-    setValue(0)
+  const onChange = (event) => {
+    setValue(event.target.value)
   }
 
   return {
-    value, increase, decrease, zero
+    type,
+    value,
+    onChange
   }
 }
 
