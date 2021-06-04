@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 
-function App() {
+const App = (props) => {
+  const left = useCounter()
+  const right = useCounter()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {left.value}
+      <button onClick={left.increase}>
+        left
+      </button>
+      <button onClick={right.increase}>
+        right
+      </button>
+      {right.value}
     </div>
-  );
+  )
 }
 
-export default App;
+const useCounter = () => {
+  const [value, setValue] = useState(0)
+
+  const increase = () => {
+    setValue(value + 1)
+  }
+
+  const decrease = () => {
+    setValue(value - 1)
+  }
+
+  const zero = () => {
+    setValue(0)
+  }
+
+  return {
+    value, increase, decrease, zero
+  }
+}
+
+export default App
