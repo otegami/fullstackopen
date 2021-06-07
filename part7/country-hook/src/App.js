@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-// import { useCountry } from './hooks'
+// import axios from 'axios'
+import { useCountry } from './hooks/index'
 
 const useField = (type) => {
   const [value, setValue] = useState('')
@@ -16,32 +16,32 @@ const useField = (type) => {
   }
 }
 
-const useCountry = (name) => {
-  const [country, setCountry] = useState(null)
+// const useCountry = (name) => {
+//   const [country, setCountry] = useState(null)
   
   
-  useEffect(() => {
+//   useEffect(() => {
 
-    const fetchCountryDetails = async (name) => {
-      try{
-        const countryDetails = await axios.get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`);
-        return { data: countryDetails.data[0], found: true };
-      }catch(error){
-        return { found: false };
-      }
-    }
+//     const fetchCountryDetails = async (name) => {
+//       try{
+//         const countryDetails = await axios.get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`);
+//         return { data: countryDetails.data[0], found: true };
+//       }catch(error){
+//         return { found: false };
+//       }
+//     }
 
-    if(name){
-      fetchCountryDetails(name).then(countryDetails => {
-        console.log('countrydetails', countryDetails);
-        setCountry(countryDetails);
-      });
-    }    
+//     if(name){
+//       fetchCountryDetails(name).then(countryDetails => {
+//         console.log('countrydetails', countryDetails);
+//         setCountry(countryDetails);
+//       });
+//     }    
   
-  }, [name]);
+//   }, [name]);
 
-  return country
-}
+//   return country
+// }
 
 const Country = ({ country }) => {
   if (!country) {
@@ -83,7 +83,7 @@ const App = () => {
         <button>find</button>
       </form>
 
-      <Country country={country} />
+      <Country country={country.value} />
     </div>
   )
 }

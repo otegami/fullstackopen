@@ -1,19 +1,22 @@
-// import axios from 'axios'
-// import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 
-// export const useCountry = (name) => {
-//   const [country, setCountry] = useState(null)
+export const useCountry = (name) => {
+  const [value, setValue] = useState(null)
 
-//   useEffect(() => {
-//     const fetchCountry = async (name) => {
-//       const countryDetail = axios.get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
-//       return countryDetail
-//     }
+  useEffect(() => {
+    const fetchCountryDetail = async (name) => {
+      const countryDetail = axios.get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
+      return countryDetail
+    }
 
-//     if(name) {
-//       fetchCountry(name).then(countryDetail => setCountry(countryDetail))
-//     }
-//   })
+    if(name) {
+      fetchCountryDetail(name).then(countryDetail => {
+        setValue(countryDetail.data[0])
+        debugger
+      })
+    }
+  }, [name])
 
-//   return { name, country }
-// }
+  return { value }
+}
