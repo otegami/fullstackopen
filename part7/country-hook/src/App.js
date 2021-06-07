@@ -83,7 +83,7 @@ const App = () => {
         <button>find</button>
       </form>
 
-      <Country country={country.value} />
+      <Country country={country} />
     </div>
   )
 }

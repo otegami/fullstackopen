@@ -2,7 +2,8 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 
 export const useCountry = (name) => {
-  const [value, setValue] = useState(null)
+  const [data, setData] = useState(null)
+  const [found, setFound] = useState(false)
 
   useEffect(() => {
     const fetchCountryDetail = async (name) => {
@@ -12,11 +13,11 @@ export const useCountry = (name) => {
 
     if(name) {
       fetchCountryDetail(name).then(countryDetail => {
-        setValue(countryDetail.data[0])
-        debugger
-      })
+        setData(countryDetail.data[0])
+        setFound(true)
+      }).catch(error => setFound(false))
     }
   }, [name])
 
-  return { value }
+  return { data, found }
 }
