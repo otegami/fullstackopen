@@ -8,17 +8,11 @@ import {
   Redirect,
   useRouteMatch
 } from "react-router-dom"
+import Home from './components/Home'
+import Users from './components/Users'
 import Login from './components/Login'
 import Notes from './components/Notes'
 import Note from './components/Note'
-
-const Home = () => (
-  <div><h2>TKTL notes app</h2></div>
-)
-
-const Users = () => (
-  <div><h2>Users</h2></div>
-)
 
 const App = () => {
   const [notes, setNotes] = useState([
