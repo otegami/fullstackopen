@@ -77,7 +77,7 @@ const App = () => {
     : null
 
   return (
-    <Router>
+    <div>
       <div>
         <Link style={padding} to="/">home</Link>
         <Link style={padding} to="/notes">notes</Link>
@@ -110,7 +110,7 @@ const App = () => {
         <br />
         <em>Note app, Department of Computer Science 2021</em>
       </div>
-    </Router>
+    </div>
   )
 }
 
