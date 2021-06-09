@@ -6,33 +6,9 @@ import {
   Route,
   Link,
   Redirect,
-  useHistory,
   useRouteMatch
 } from "react-router-dom"
-
-const Login = (props) => {
-  const history = useHistory()
-  const onSubmit = (event) => {
-    event.preventDefault()
-    props.onLogin('otegami')
-    history.push('/')
-  }
-
-  return (
-    <div>
-      <h2>login</h2>
-      <form onSubmit={onSubmit}>
-        <div>
-          username: <input />
-        </div>
-        <div>
-          password: <input type='password'/>
-        </div>
-        <button type="submit">login</button>
-      </form>
-    </div>
-  )
-}
+import Login from './components/Login'
 
 const Home = () => (
   <div><h2>TKTL notes app</h2></div>
