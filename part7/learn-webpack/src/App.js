@@ -1,7 +1,10 @@
 import React from 'react'
+import './index.css'
 
 const App = () => (
-  <div>Hello Webpack</div>
+  <div className="container">
+    Hello Webpack
+  </div>
 )
 
 export default App
