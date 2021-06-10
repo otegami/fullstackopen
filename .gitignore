@@ -2,3 +2,4 @@
 /*/*/.env.development
 /*/*/db.json
 /.vscode
+/*/*/build
