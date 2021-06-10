@@ -4,7 +4,8 @@
   "description": "practising webpack",
   "scripts": {
     "build": "webpack --mode=production",
-    "start": "webpack serve --mode=development"
+    "start": "webpack serve --mode=development",
+    "server": "json-server -p3001 --watch db.json"
   },
   "license": "MIT",
   "dependencies": {
@@ -15,6 +16,7 @@
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.6",
+    "json-server": "^0.16.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "style-loader": "^2.0.0",
