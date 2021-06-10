@@ -8,15 +8,14 @@ const useNotes = (url) => {
     axios.get(url).then(response => {
       setNotes(response.data)
     })
-  })
+  }, [])
   return notes
 }
 
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
-  const url = 'https://blooming-atoll-75500.herokuapp.com/api/notes'
-  const notes = useNotes(url)
+  const notes = useNotes(BACKEND_URL)
 
   const handleClick = () => {
     setCounter(counter + 1)
@@ -27,7 +26,7 @@ const App = () => {
     <div className="container">
       Hello webpack { counter } clicks
       <button onClick={handleClick}>press</button>
-      <div>{notes.length} notes on server {url}</div>
+      <div>{notes.length} notes on server {BACKEND_URL}</div>
     </div>
   )
 }
