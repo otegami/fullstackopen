@@ -1,4 +1,4 @@
-const { ApolloServer, UserInputError, gql } = require('apollo-server')const { ApolloServer, gql } = require('apollo-server')
+const { ApolloServer, UserInputError, gql } = require('apollo-server')
 // const { vi: uuid } = require('uuid')
 
 let persons = [
@@ -99,7 +99,7 @@ const resolvers = {
       persons = persons.concat(person)
       return person
     },
-    editNumber: (root, args){
+    editNumber: (root, args) => {
       const person = persons.find(p => p.name === args.name)
       if(!person) {
         return null
