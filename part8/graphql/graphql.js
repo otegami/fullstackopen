@@ -1,5 +1,5 @@
 const { ApolloServer, UserInputError, gql } = require('apollo-server')
-// const { vi: uuid } = require('uuid')
+const { vi: uuid } = require('uuid')
 
 let persons = [
   {
@@ -61,9 +61,6 @@ const typeDefs = gql`
     ): Person
   }
 `
-const generateId = () => {
-  return Math.floor(Math.random() * (10000)) + 1
-}
 
 const resolvers = {
   Query: {
@@ -95,7 +92,7 @@ const resolvers = {
         })
       }
 
-      const person = { ...args, id: generateId() }
+      const person = { ...args, id: uuid() }
       persons = persons.concat(person)
       return person
     },
