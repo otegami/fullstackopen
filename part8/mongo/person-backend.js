@@ -1,5 +1,7 @@
 const { ApolloServer, UserInputError, gql } = require('apollo-server')
-const { vi: uuid } = require('uuid')
+const mongoose = require('mongoose')
+const Person = reuqire('./models/person')
+// const { vi: uuid } = require('uuid')
 
 let persons = [
   {
@@ -23,6 +25,8 @@ let persons = [
     id: '3d599471-3436-11e9-bc57-8b80ba54c431'
   },
 ]
+
+const MONGODB_URI = ''
 
 const typeDefs = gql`
   type Address {
