@@ -138,7 +138,7 @@ const resolvers = {
 
       return user.save()
         .catch(error => {
-          throw new UserInputEroror(error.message, {
+          throw new UserInputError(error.message, {
             invalidArgs: args
           })
         })
