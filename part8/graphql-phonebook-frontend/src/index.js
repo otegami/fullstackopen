@@ -9,7 +9,7 @@ import {
   InMemoryCache,
 } from '@apollo/client'
 
-import { setContext } from 'apollop-link-context'
+import { setContext } from 'apollo-link-context'
 
 const authlink = setContext((_, { headers }) => {
   const token = localStorage.getItem('phonenumbers-user-token')
@@ -21,7 +21,7 @@ const authlink = setContext((_, { headers }) => {
   }
 })
 
-const httpLink = new HttpLink({ uri: 'http://localhost:400' })
+const httpLink = new HttpLink({ uri: '/' })
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),

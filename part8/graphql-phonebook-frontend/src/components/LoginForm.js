@@ -12,7 +12,7 @@ const LoginForm = ({ setError, setToken }) => {
     }
   })
 
-  useEffecct(() => {
+  useEffect(() => {
     if ( result.data ) {
       const token = result.data.login.value
       setToken(token)
