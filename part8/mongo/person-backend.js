@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { ApolloServer, UserInputError, gql, AuthenticationError } = require('apollo-server')
+const { ApolloServer, UserInputError, PubSub, gql, AuthenticationError } = require('apollo-server')
 const { v1: uuid } = require('uuid')
 const jwt = require('jsonwebtoken')
 
@@ -10,6 +10,7 @@ const User = require('./models/user')
 
 const MONGODB_URI = process.env.MONGODB_URI
 const JWT_SECRET = process.env.JWT_SECRET
+const pubsub = new PubSub()
 
 console.log('connecting to', MONGODB_URI)
 
@@ -78,6 +79,10 @@ const typeDefs = gql`
       name: String!
     ): User
   }
+
+  type Subscription {
+    personsAdded: Person
+  }
 `
 
 const resolvers = {
@@ -112,13 +117,17 @@ const resolvers = {
 
       try {
         await person.save()
-        currentUser.friends = currentUser.friends.concat(person)
-        await currentUser.save()
+        console.log(currentUser.friends)
+        // currentUser.friends = currentUser.friends.concat(person)
+        // await currentUser.save()
       } catch (error) {
         throw new UserInputError(error.message, {
           invalidArgs: args
         })
       }
+
+      pubsub.publish('PERSON_ADDED', { personAdded: person })
+
       return person
     },
     editNumber: async (root, args) => {
@@ -174,6 +183,11 @@ const resolvers = {
       await currentUser.save()
 
       return currentUser
+    },
+  },
+  Subscription: {
+    personsAdded: {
+      subscribe: () => pubsub.asyncIterator(['PERSON_ADDED'])
     }
   }
 }
@@ -193,6 +207,7 @@ const server = new ApolloServer({
   }
 })
 
-server.listen().then(({ url }) => {
+server.listen().then(({ url, subscriptionsUrl }) => {
   console.log(`Server ready at ${url}`)
+  console.log(`Subscription ready at ${subscriptionsUrl}`)
 })
